@@ -1,602 +1,367 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Gratified - Proposal for SF Main Library Café. Creating a nourishing, collaborative, and creative space where online people meet in real life.">
-    <title>Gratified @ Main Library - Proposal</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='8' y='8' width='16' height='16' fill='%23C08497' transform='rotate(45 16 16)'/><rect x='10' y='10' width='12' height='12' fill='%23C08497' transform='rotate(45 16 16)'/></svg>">
-    <link href="https://api.fontshare.com/v2/css?f[]=Satoshi@1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gratified — SF Main Library Proposal</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      margin: 0; padding: 0; color: #111;
+      line-height: 1.55;
+    }
+    header {
+      background: #fdfdfd;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 16px 22px;
+      position: sticky; top: 0; z-index: 100;
+    }
+    nav a {
+      margin-right: 14px; color: #444; text-decoration: none;
+      font-size: 14px; font-weight: 500;
+    }
+    nav a:hover { text-decoration: underline; }
+    .container { max-width: 900px; margin: 32px auto; padding: 0 18px; }
+    h1, h2, h3 { font-weight: 700; }
+    h1 { font-size: 28px; margin-bottom: 0; }
+    h2 { margin-top: 40px; font-size: 22px; }
+    h3 { margin-top: 20px; font-size: 18px; }
+    .card {
+      border: 1px solid #e6e6e6;
+      padding: 16px; border-radius: 8px;
+      background: #fff; margin-bottom: 24px;
+    }
+    .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    @media(max-width:800px){ .charts { grid-template-columns: 1fr; } }
+    textarea {
+      width: 100%; min-height: 80px; font-size: 15px;
+      border: 1px solid #ddd; padding: 8px; border-radius: 6px;
+    }
+    input[type=number] { padding: 6px; width: 100%; }
+    button { padding: 8px 14px; margin-top: 10px; cursor: pointer; }
+    .small { font-size: 13px; color:#666; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
-    <!-- Skip Navigation Link for Accessibility -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <div class="muddy-flow"></div>
-    <canvas id="spice-canvas"></canvas>
-    <div class="grain-overlay"></div>
-    <div class="ancient-pattern"></div>
+<header>
+  <div style="font-weight:700;font-size:18px;">Gratified — Library Café Proposal</div>
+  <nav>
+    <a href="#exec">Executive Summary</a>
+    <a href="#concept">Concept</a>
+    <a href="#startup">Startup & Funding</a>
+    <a href="#ops">Operations</a>
+    <a href="#menu">Menu</a>
+    <a href="#sustain">Sustainability</a>
+    <a href="#finance">Financials</a>
+    <a href="#charts">Charts</a>
+  </nav>
+</header>
 
-    <!-- Main Navigation -->
-    <nav class="main-nav" id="mainNav">
-        <a href="#landing" class="nav-link active" data-page="landing">
-            <span class="nav-icon icon-dash"></span>
-        </a>
-        <a href="#operations" class="nav-link" data-page="operations">
-            <span class="nav-icon icon-equal"></span>
-        </a>
-        <a href="#subscribe" class="nav-link" data-page="subscribe">
-            <svg class="nav-icon icon-diamond" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="18" height="18"></rect></svg>
-        </a>
-        <a href="#financial" class="nav-link" data-page="financial">
-            <svg class="nav-icon icon-bronze" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="18" height="18"></rect></svg>
-        </a>
-        <a href="#vision" class="nav-link" data-page="vision">
-            <svg class="nav-icon icon-yellow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 511.995 511.995" fill="currentColor" aria-hidden="true"><path d="M507.807,200.272L262.474,12.859c-3.819-2.923-9.109-2.923-12.949,0L4.191,200.272c-3.627,2.773-5.077,7.509-3.648,11.84l93.717,281.92c1.451,4.352,5.547,7.296,10.133,7.296h303.253c4.608,0,8.683-2.944,10.091-7.296l93.717-281.92C512.885,207.803,511.413,203.046,507.807,200.272z"/></svg>
-        </a>
-    </nav>
+<div class="container">
 
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-        <svg class="theme-toggle-icon light" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        <svg class="theme-toggle-icon dark" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-    </button>
+<!-- ========================================================= -->
+<!-- PAGE 1 — EXEC SUMMARY + CONCEPT -->
+<!-- ========================================================= -->
 
-    <!-- Page Container -->
-    <main class="pages-container" id="main-content">
+<section id="exec" class="card">
+  <h1>Gratified — Business & Operations Plan (5 Pages)</h1>
 
-        <!-- ========== SECTION 1: LANDING ========== -->
-        <div class="page active" id="page-landing" data-page="landing">
-            <div class="container landing-container">
-                <div class="landing-hero">
-                    <p class="tagline landing-tagline">RFP #2024.09 Response</p>
-                    <h1 class="logo landing-logo">Gratified</h1>
-                    <div class="logobot landing-logobot">@ main library</div>
+  <h2>1. Executive Summary</h2>
+  <p>
+    Gratified proposes to operate a community-focused café at the Lower Level of
+    San Francisco’s Main Library. The café will emphasize <strong>nourishing drinks</strong>
+    made with high-quality ingredients, <strong>collaborative partnerships</strong> with local
+    producers, and a <strong>creative environment</strong> that supports art, meetups, and the
+    needs of a technologically-embedded generation seeking in-person connection.
+  </p>
 
-                    <!-- Diamond Logo -->
-                    <div class="landing-diamond">
-                        <svg viewBox="0 0 100 100" class="diamond-svg">
-                            <rect class="diamond-fill" x="15" y="15" width="70" height="70" transform="rotate(45 50 50)" fill="var(--theme-accent)"/>
-                            <rect class="diamond-stroke" x="15" y="15" width="70" height="70" transform="rotate(45 50 50)" fill="none" stroke="var(--theme-accent)" stroke-width="2"/>
-                        </svg>
-                    </div>
+  <p>
+    The proposed rental structure is <strong>8% of gross sales with a \$250 minimum monthly guarantee</strong>.
+    Our launch strategy keeps operations simple (drinks-only first 2–3 months), ensuring compliance with
+    no-cook constraints and maintaining lean overhead.
+  </p>
 
-                    <div style="margin-top: 3rem; max-width: 600px; text-align: left;">
-                        <h3 style="font-size: 1.2rem; margin-bottom: 1rem; opacity: 0.9;">General Concept</h3>
-                        <p style="line-height: 1.8; opacity: 0.85; margin-bottom: 1.5rem;">
-                            Gratified aims to create a nourishing, collaborative, and creative space where online people meet in real life.
-                        </p>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
-                            <div>
-                                <h4 style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 0.5rem;">Nourishing</h4>
-                                <p style="font-size: 0.95rem; opacity: 0.8;">High quality ingredients, low/no sweet defaults, low-carb bites</p>
-                            </div>
-                            <div>
-                                <h4 style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 0.5rem;">Collaborative</h4>
-                                <p style="font-size: 0.95rem; opacity: 0.8;">Fill novel niche in café ecosystem, sustainable partnerships, reliable service</p>
-                            </div>
-                            <div>
-                                <h4 style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 0.5rem;">Creative</h4>
-                                <p style="font-size: 0.95rem; opacity: 0.8;">Work-in-progress aesthetic, art meetups, trend-setting specialty drinks</p>
-                            </div>
-                        </div>
+  <p>
+    Gratified currently has <strong>\$50,000 available</strong> to start and sustain the Library location
+    (\$40,000 personal capital + \$10,000 equity). A larger \$250,000 raise is planned for brand
+    consolidation later in 2025, but is not required for the Library pilot.
+  </p>
 
-                        <div style="margin-top: 3rem; padding: 1.5rem; background: rgba(192, 132, 151, 0.1); border-radius: 8px;">
-                            <h4 style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 1rem;">Why Main Library?</h4>
-                            <p style="font-size: 0.95rem; opacity: 0.85; line-height: 1.7;">
-                                SF Main Library is a historical center of inquiry and, with its many floors and active conference hall, continues to be a strong community hub. Gratified @ Main Library would give visitors greater amenities and gather new groups in-person with amazing service. The location helps us mature into full public-facing responsibility affordably with revenue-based rental and pre-existing equipment.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <p>
+    Owner/operator <strong>Leah McCuan</strong> brings 5 years of experience in operations, management,
+    communications, and technical coordination — including roles supporting
+    executive leadership at Anthropic, Palisade Research, and Theorem Labs.
+  </p>
+</section>
 
-        <!-- ========== SECTION 2: OPERATIONS ========== -->
-        <div class="page" id="page-operations" data-page="operations">
-            <div class="container">
-                <div class="header">
-                    <h2 class="logo">Operations</h2>
-                    <div class="tagline">hours, menu & sustainability</div>
-                </div>
+<section id="concept" class="card">
+  <h2>2. Concept & Mission</h2>
+  <p>
+    Gratified aims to create a space that is:
+  </p>
+  <ul>
+    <li><strong>Nourishing</strong>: clean, low-sweet drinks; low-carb bites; high-quality ingredients.</li>
+    <li><strong>Collaborative</strong>: partnerships with local roasters, bakers, and artists.</li>
+    <li><strong>Creative</strong>: work-in-progress aesthetic, art displays, meetup support.</li>
+  </ul>
 
-                <div class="content">
-                    <!-- Hours of Operation -->
-                    <div class="section">
-                        <h3 class="section-title">Hours of Operation</h3>
-                        <p class="section-intro">Open during all library hours to serve visitors, staff, and community members</p>
-                        
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
-                            <div style="padding: 1rem; background: rgba(192, 132, 151, 0.05); border-radius: 6px;">
-                                <strong>Sunday</strong><br>12:00 PM – 6:00 PM
-                            </div>
-                            <div style="padding: 1rem; background: rgba(192, 132, 151, 0.05); border-radius: 6px;">
-                                <strong>Monday</strong><br>9:00 AM – 6:00 PM
-                            </div>
-                            <div style="padding: 1rem; background: rgba(192, 132, 151, 0.05); border-radius: 6px;">
-                                <strong>Tuesday-Thursday</strong><br>9:00 AM – 8:00 PM
-                            </div>
-                            <div style="padding: 1rem; background: rgba(192, 132, 151, 0.05); border-radius: 6px;">
-                                <strong>Friday</strong><br>12:00 PM – 6:00 PM
-                            </div>
-                            <div style="padding: 1rem; background: rgba(192, 132, 151, 0.05); border-radius: 6px;">
-                                <strong>Saturday</strong><br>10:00 AM – 6:00 PM
-                            </div>
-                        </div>
-                    </div>
+  <p>
+    The Main Library is a multi-floor hub of research, events, and civic culture.
+    The lower-level café space provides an ideal environment for Gratified to serve
+    regular patrons, event-goers, students, and staff while adding an energizing and
+    community-building element to the Library ecosystem.
+  </p>
+</section>
 
-                    <!-- Menu -->
-                    <div class="section" style="margin-top: 3rem;">
-                        <h3 class="section-title">Menu & Pricing</h3>
-                        <p class="section-intro">Thoughtfully curated drinks focusing on quality ingredients and health-conscious options</p>
+<!-- ========================================================= -->
+<!-- PAGE 2 — STARTUP COSTS + FUNDING + EXPERIENCE -->
+<!-- ========================================================= -->
 
-                        <div style="margin-top: 2rem;">
-                            <div style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">$4 — Simple</h4>
-                                <p style="opacity: 0.8;">Drip coffee • Espresso drinks (shot, cappuccino, latte) • Chai</p>
-                            </div>
+<section id="startup" class="card">
+  <h2>3. Startup Costs</h2>
+  <p>Estimated startup costs for the Library location (first 1–3 months):</p>
+  <ul>
+    <li>\$5,000 — permitting & compliance</li>
+    <li>\$5,000 — initial inventory</li>
+    <li>\$12,000 — espresso machine, grinder, small appliances (microwaves, blender)</li>
+    <li>\$8,000 — marketing, legal, graphic/brand consolidation</li>
+    <li>\$10,000 — operations buffer for stocking, repairs, payroll</li>
+  </ul>
 
-                            <div style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">$8 — Special</h4>
-                                <p style="opacity: 0.8;">Single origin pour over • Ceremonial matcha • Hot chocolate (optional shot)</p>
-                            </div>
+  <p><strong>Total: approx. \$40,000–\$50,000</strong></p>
 
-                            <div style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">$16 — Audacious</h4>
-                                <p style="opacity: 0.8;">Seasonal specialty drinks using fresh local fruits, protein-enhanced options, longevity-focused ingredients. Labor-intensive preparations showcasing trends.</p>
-                            </div>
+  <h3>4. Funding Plan</h3>
+  <ul>
+    <li>\$40,000 — committed personal funding</li>
+    <li>\$10,000 — existing equity investment</li>
+    <li>\$250,000 — planned March raise (not required for Library opening)</li>
+  </ul>
 
-                            <div style="padding: 1rem; background: rgba(192, 132, 151, 0.1); border-radius: 6px; font-style: italic; opacity: 0.85;">
-                                Food menu to be developed collaboratively with City input. Focus on low-sweet/keto-leaning options, minimal processing, locally prepared. Launch may begin drinks-only for first 2-3 months.
-                            </div>
-                        </div>
-                    </div>
+  <h3>5. Experience</h3>
+  <p>
+    Although not operating a standalone café previously, the operator offers:
+  </p>
+  <ul>
+    <li>1.5 years managing technician & training operations at a medical office</li>
+    <li>3 years as Personal/Executive Assistant & Research Manager supporting
+        high-level executives (operations, logistics, hiring, protocol development)</li>
+    <li>8 months developing Gratified branding, menus, and pop-up/test sites</li>
+  </ul>
 
-                    <!-- Sustainable Practices -->
-                    <div class="section" style="margin-top: 3rem;">
-                        <h3 class="section-title">Sustainable Food Practices</h3>
-                        
-                        <div style="margin-top: 1.5rem;">
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">🌱 Local Processing</h4>
-                                <p style="opacity: 0.85;">80%+ of coffee and food offerings roasted or prepared locally</p>
-                            </div>
+  <p>
+    References and supporting documents included in Appendix A of the final PDF submission.
+  </p>
+</section>
 
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">🥤 Minimal Processing</h4>
-                                <p style="opacity: 0.85;">Drinks made without artificial dyes or flavors. Food contains primarily whole ingredients (simple egg tarts, whole grains, no hydrogenated oils)</p>
-                            </div>
+<!-- ========================================================= -->
+<!-- PAGE 3 — OPERATIONS, HOURS, LAYOUT -->
+<!-- ========================================================= -->
 
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">♻️ SF Ordinance Compliance</h4>
-                                <p style="opacity: 0.85;">Exclusively BPI/TÜV certified compostable serviceware • "For here" cup program with dishwasher • Three-bin waste system with staff training</p>
-                            </div>
+<section id="ops" class="card">
+  <h2>6. Operations & Staffing</h2>
+  <p>Core operations will follow Library hours. Proposed service:</p>
+  <ul>
+    <li>Mon 9am–6pm</li>
+    <li>Tues–Thu 9am–8pm</li>
+    <li>Fri 12pm–6pm</li>
+    <li>Sat 10am–6pm</li>
+    <li>Sun 12pm–6pm</li>
+  </ul>
 
-                            <div style="margin-bottom: 1.5rem;">
-                                <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">📚 Education</h4>
-                                <p style="opacity: 0.85;">Employee handbook (by month 3) with sustainability info • Staff encouraged to share with customers • Posted signage on sustainable offerings</p>
-                            </div>
+  <h3>Staffing Plan</h3>
+  <ul>
+    <li>Month 1–3: Owner full-time + 1 part-time barista</li>
+    <li>Month 3+: Add second PT barista as demand increases</li>
+    <li>Off-site partners for pastries and packaged food</li>
+  </ul>
 
-                            <div>
-                                <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">🌍 Fair Trade Vision</h4>
-                                <p style="opacity: 0.85;">Long-term goal: improve trade route efficiencies for more direct purchasing from East African coffee producers. Support this vision through partnership decisions.</p>
-                            </div>
-                        </div>
-                    </div>
+  <h3>Equipment & Layout</h3>
+  <ul>
+    <li>Espresso machine + grinder</li>
+    <li>Pour-over station</li>
+    <li>Microwave(s), blender, kettles (all plug-in; compliant with no-cook restrictions)</li>
+    <li>Charging stations integrated into bench seating if permitted</li>
+    <li>Optional water station & refill setup</li>
+  </ul>
 
-                    <!-- Staffing & Inventory -->
-                    <div class="section" style="margin-top: 3rem;">
-                        <h3 class="section-title">Staffing & Operations</h3>
-                        
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
-                            <div style="padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem;">Initial Team</h4>
-                                <p style="opacity: 0.85; font-size: 0.9rem;">Owner/operator on-site daily during first 6 months. Hire 1-2 part-time baristas within first 3 months as volume grows.</p>
-                            </div>
-                            
-                            <div style="padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem;">Delivery & Inventory</h4>
-                                <p style="opacity: 0.85; font-size: 0.9rem;">Weekly delivery schedule for coffee beans and supplies. Daily fresh food deliveries from local partners. Minimal storage footprint.</p>
-                            </div>
-                            
-                            <div style="padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem;">Equipment</h4>
-                                <p style="opacity: 0.85; font-size: 0.9rem;">Utilize existing equipment in space. Add espresso machine, grinder, blender for specialty drinks. No cooking required (microwave only).</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <p>
+    A simple black-and-white layout diagram will be submitted as RFP Appendix C.
+  </p>
+</section>
 
-        <!-- ========== SECTION 3: SUBSCRIPTION ========== -->
-        <div class="page" id="page-subscribe" data-page="subscribe">
-            <div class="container">
-                <div class="header">
-                    <h2 class="logo">Community</h2>
-                    <div class="tagline">subscription model</div>
-                </div>
+<!-- ========================================================= -->
+<!-- PAGE 4 — MENU + SUSTAINABILITY + COMMUNITY -->
+<!-- ========================================================= -->
 
-                <div class="content">
-                    <div class="section">
-                        <h3 class="section-title">Monthly Unlimited Pass</h3>
-                        <p class="section-intro">Building a core community of regular visitors who run into each other and create lasting connections</p>
+<section id="menu" class="card">
+  <h2>7. Menu & Pricing</h2>
 
-                        <div style="margin-top: 2rem; max-width: 500px; margin-left: auto; margin-right: auto;">
-                            <div style="padding: 2rem; background: rgba(192, 132, 151, 0.1); border-radius: 12px; text-align: center;">
-                                <div style="font-size: 3rem; font-weight: 600; margin-bottom: 0.5rem;">$108</div>
-                                <div style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 1.5rem;">per month</div>
-                                
-                                <div style="text-align: left; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(192, 132, 151, 0.2);">
-                                    <div style="margin-bottom: 0.75rem;">✓ Unlimited simple drinks ($4 tier)</div>
-                                    <div style="margin-bottom: 0.75rem;">✓ Unlimited special drinks ($8 tier)</div>
-                                    <div style="margin-bottom: 0.75rem;">✓ Up to 3 drinks per day</div>
-                                    <div style="margin-bottom: 0.75rem;">✓ Discounts on food items</div>
-                                    <div>✓ Community connection</div>
-                                </div>
-                            </div>
+  <h3>Drinks</h3>
+  <ul>
+    <li><strong>\$5 Simple:</strong> drip, espresso, cappuccino, latte, chai</li>
+    <li><strong>\$10 Special:</strong> single-origin pour-over, ceremonial matcha, premium hot chocolate</li>
+    <li><strong>\$15 Audacious:</strong> seasonal drinks (fresh fruit purées, protein add-ons, longevity blends)</li>
+  </ul>
 
-                            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                <h4 style="font-size: 1rem; margin-bottom: 0.75rem;">Proven Success</h4>
-                                <p style="opacity: 0.85; line-height: 1.6;">
-                                    Our subscription model had strong success at test locations, helping grow a core community of customers who were excited to run into and chat with one another. This creates the recurring revenue stability needed for sustainable operations while fostering genuine connections.
-                                </p>
-                            </div>
+  <h3>Subscription</h3>
+  <p><strong>\$108/month</strong> — unlimited simple & special drinks (up to 3/day).  
+     Proven successful at test locations for building community and steady revenue.</p>
 
-                            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(192, 132, 151, 0.05); border-radius: 6px; font-size: 0.9rem; opacity: 0.8; text-align: center;">
-                                Cancel anytime • No commitment • Phone-based membership card
-                            </div>
-                        </div>
-                    </div>
+  <h3>Food</h3>
+  <p>
+    Launch drinks-only for first 2–3 months.  
+    Add small off-site–prepared items later (egg tarts, whole-grain items, low-sweet snacks).
+  </p>
+</section>
 
-                    <!-- Value Proposition -->
-                    <div class="section" style="margin-top: 3rem;">
-                        <h3 class="section-title">Why It Works</h3>
-                        
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
-                            <div style="padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem;">For Customers</h4>
-                                <p style="opacity: 0.85; font-size: 0.9rem;">Regular library visitors save 50%+ on their daily coffee. Predictable budget. Priority during busy times. Sense of belonging.</p>
-                            </div>
-                            
-                            <div style="padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem;">For Gratified</h4>
-                                <p style="opacity: 0.85; font-size: 0.9rem;">Stable monthly revenue. Improved inventory planning. Reduced transaction costs. Built-in marketing through member satisfaction.</p>
-                            </div>
-                            
-                            <div style="padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem;">For Library</h4>
-                                <p style="opacity: 0.85; font-size: 0.9rem;">Enhanced visitor experience. Regular foot traffic. Community building. Consistent café presence that patrons can depend on.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<section id="sustain" class="card">
+  <h2>8. Sustainability Commitments</h2>
+  <ul>
+    <li>Compostable to-go serviceware</li>
+    <li>Three-bin waste system with clear signage</li>
+    <li>80% of coffee/food sourced locally</li>
+    <li>No artificial colors/flavors; whole-ingredient focus</li>
+    <li>Long-term goal: support more efficient trade routes with East African coffee producers</li>
+    <li>Employee handbook (Month 3) with sustainability training & customer-education notes</li>
+  </ul>
+</section>
 
-        <!-- ========== SECTION 4: FINANCIAL & PARTNERSHIPS ========== -->
-        <div class="page" id="page-financial" data-page="financial">
-            <div class="container">
-                <div class="header">
-                    <h2 class="logo">Financial Model</h2>
-                    <div class="tagline">revenue, funding & partnerships</div>
-                </div>
+<!-- ========================================================= -->
+<!-- PAGE 5 — FINANCIALS + CHARTS -->
+<!-- ========================================================= -->
 
-                <div class="content">
-                    <!-- Revenue to City -->
-                    <div class="section">
-                        <h3 class="section-title">Proposed Rent Structure</h3>
-                        
-                        <div style="margin-top: 2rem;">
-                            <div style="padding: 2rem; background: rgba(192, 132, 151, 0.1); border-radius: 12px; margin-bottom: 1.5rem;">
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
-                                    <div>
-                                        <div style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 0.5rem;">Monthly Base Rent</div>
-                                        <div style="font-size: 2rem; font-weight: 600;">$250</div>
-                                    </div>
-                                    <div>
-                                        <div style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 0.5rem;">Percentage Rent</div>
-                                        <div style="font-size: 2rem; font-weight: 600;">8%</div>
-                                        <div style="font-size: 0.85rem; opacity: 0.7;">of gross sales</div>
-                                    </div>
-                                </div>
-                            </div>
+<section id="finance" class="card">
+  <h2>9. Financial Summary</h2>
 
-                            <div style="padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                <h4 style="font-size: 1rem; margin-bottom: 0.75rem;">Revenue Projections</h4>
-                                <p style="opacity: 0.85; line-height: 1.6; margin-bottom: 1rem;">
-                                    Conservative estimate: 50-75 transactions daily at $6 average → $9,000-13,500 monthly gross sales → $720-1,080 monthly percentage rent to City
-                                </p>
-                                <p style="opacity: 0.85; line-height: 1.6;">
-                                    With subscription members: Additional 20-30 members → +$2,160-3,240 monthly revenue → Total City revenue $420-510 monthly from subscriptions
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+  <h3>Projected Monthly Revenue (Month 3)</h3>
+  <ul>
+    <li>Simple drinks: 160/day × \$5 × 30 = \$24,000</li>
+    <li>Special drinks: 30/day × \$10 × 30 = \$9,000</li>
+    <li>Audacious: 10/day × \$15 × 30 = \$4,500</li>
+    <li>Subscriptions: 45 × \$108 = \$4,860</li>
+  </ul>
 
-                    <!-- Startup Costs & Funding -->
-                    <div class="section" style="margin-top: 3rem;">
-                        <h3 class="section-title">Startup & Funding</h3>
-                        
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
-                            <div style="padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                <h4 style="font-size: 0.95rem; margin-bottom: 1rem;">Estimated Startup Costs</h4>
-                                <div style="font-size: 0.9rem; opacity: 0.85;">
-                                    <div style="margin-bottom: 0.5rem;">• Permitting & compliance: $5,000</div>
-                                    <div style="margin-bottom: 0.5rem;">• Initial inventory: $5,000</div>
-                                    <div style="margin-bottom: 0.5rem;">• First 6 months operations: $18,000</div>
-                                    <div style="margin-bottom: 0.5rem;">• Equipment & furnishings: $7,000</div>
-                                    <div style="margin-bottom: 0.5rem;">• Contingency: $5,000</div>
-                                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(192, 132, 151, 0.2); font-weight: 600;">
-                                        Total: $40,000-50,000
-                                    </div>
-                                </div>
-                            </div>
+  <p><strong>Estimated total ≈ \$42,000/month</strong></p>
 
-                            <div style="padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                <h4 style="font-size: 0.95rem; margin-bottom: 1rem;">Current Funding</h4>
-                                <div style="font-size: 0.9rem; opacity: 0.85;">
-                                    <div style="margin-bottom: 0.5rem;">• Personal capital: $40,000 ✓</div>
-                                    <div style="margin-bottom: 0.5rem;">• Equity investment: $10,000 ✓</div>
-                                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(192, 132, 151, 0.2);">
-                                        <div style="font-weight: 600; margin-bottom: 0.5rem;">Total Available: $50,000</div>
-                                        <div style="opacity: 0.7; font-size: 0.85rem;">Sufficient for launch & operations</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+  <h3>Rent</h3>
+  <p>
+    8% of gross sales = approx. <strong>\$3,360/month</strong> at projected Month-3 revenue.  
+    Meets City expectations for percentage-based café permits.
+  </p>
 
-                        <div style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                            <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem;">Future Growth (Optional)</h4>
-                            <p style="opacity: 0.85; font-size: 0.9rem;">
-                                Planning March fundraise of $250k for brand consolidation and expansion to additional locations. Library location does not depend on this funding—we're fully capitalized for successful launch.
-                            </p>
-                        </div>
-                    </div>
+  <h3>Monthly Operating Costs</h3>
+  <ul>
+    <li>Payroll: \$7,000–\$9,000</li>
+    <li>Inventory: \$8,000–\$10,000</li>
+    <li>Rent (8%): \$3,000–\$3,500</li>
+    <li>Utilities/insurance/misc: \$2,000–\$2,800</li>
+  </ul>
 
-                    <!-- Community Support Model -->
-                    <div class="section" style="margin-top: 3rem;">
-                        <h3 class="section-title">Community Profit Sharing</h3>
-                        
-                        <div style="margin-top: 1.5rem; padding: 2rem; background: rgba(192, 132, 151, 0.1); border-radius: 12px;">
-                            <div style="text-align: center; margin-bottom: 1.5rem;">
-                                <div style="font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem;">8%</div>
-                                <div style="font-size: 1.1rem; opacity: 0.8;">of net profits allocated to community support</div>
-                            </div>
-                            
-                            <div style="text-align: left; padding-top: 1.5rem; border-top: 1px solid rgba(192, 132, 151, 0.2);">
-                                <h4 style="font-size: 1rem; margin-bottom: 1rem;">Supporting</h4>
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                                    <div style="opacity: 0.85;">
-                                        <div style="margin-bottom: 0.5rem;">📚 Library events</div>
-                                        <div style="margin-bottom: 0.5rem;">🎨 Art meetups</div>
-                                    </div>
-                                    <div style="opacity: 0.85;">
-                                        <div style="margin-bottom: 0.5rem;">💻 Tech community</div>
-                                        <div style="margin-bottom: 0.5rem;">🌱 Local nonprofits</div>
-                                    </div>
-                                </div>
-                                <p style="margin-top: 1rem; opacity: 0.85; font-size: 0.9rem; line-height: 1.6;">
-                                    This commitment ensures Gratified actively contributes to the ecosystem that supports us. We'll sponsor meetups, provide refreshments for library events, and donate to organizations aligned with our values.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+  <p>Projected operating margin Month-3: <strong>18–25%</strong>.</p>
+</section>
 
-                    <!-- Partnerships -->
-                    <div class="section" style="margin-top: 3rem;">
-                        <h3 class="section-title">Partnership Approach</h3>
-                        <p class="section-intro">Building sustainable relationships with amazing local providers</p>
 
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
-                            <div style="padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem;">Coffee Roasters</h4>
-                                <p style="opacity: 0.85; font-size: 0.9rem;">Partner with 2-3 local roasters for rotating single-origin offerings. Feature their story and sourcing practices.</p>
-                            </div>
-                            
-                            <div style="padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem;">Food Suppliers</h4>
-                                <p style="opacity: 0.85; font-size: 0.9rem;">Local bakeries and food prep businesses for grab-and-go items. Minimize our prep footprint, maximize their expertise.</p>
-                            </div>
-                            
-                            <div style="padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem;">Community Groups</h4>
-                                <p style="opacity: 0.85; font-size: 0.9rem;">Collaborate with library programming, local meetups, and creative communities to activate the space.</p>
-                            </div>
-                        </div>
+<!-- ========================================================= -->
+<!-- INTERACTIVE CHARTS -->
+<!-- ========================================================= -->
 
-                        <div style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                            <h4 style="font-size: 1rem; margin-bottom: 0.75rem;">Test Location Collaborations</h4>
-                            <p style="opacity: 0.85; line-height: 1.6;">
-                                Over 8 months, we've successfully operated in partnership with workspace managers across the Bay Area. Strong references available from venue hosts who appreciated our reliability, quality, and community-building approach. (See Appendix A in full proposal)
-                            </p>
-                        </div>
-                    </div>
+<section id="charts" class="card">
+  <h2>10. Operational Charts & Forecast Simulator</h2>
+  <div class="charts">
+    <div>
+      <h3>Weekly Sales by Category</h3>
+      <canvas id="salesChart" height="260"></canvas>
+    </div>
+    <div>
+      <h3>Subscriptions vs Walk-In (Monthly)</h3>
+      <canvas id="subChart" height="260"></canvas>
+    </div>
+  </div>
 
-                    <!-- Experience -->
-                    <div class="section" style="margin-top: 3rem;">
-                        <h3 class="section-title">Operator Experience</h3>
-                        
-                        <div style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                            <h4 style="font-size: 1rem; margin-bottom: 1rem;">Leah McCuan, Founder</h4>
-                            <div style="opacity: 0.85; line-height: 1.7;">
-                                <p style="margin-bottom: 1rem;">
-                                    <strong>5 years</strong> of operations, management, and communications experience, including:
-                                </p>
-                                <div style="margin-bottom: 0.75rem;">• <strong>1.5 years</strong> managing technician role (training staff, developing protocols) at optometry office</div>
-                                <div style="margin-bottom: 0.75rem;">• <strong>3 years</strong> as Personal/Executive Assistant and Research Manager for tech executives</div>
-                                <div style="margin-bottom: 0.75rem;">• Clients include Daniela Amodei (President, Anthropic), Jeffrey Ladish (CEO, Palisade Research), Jason Gross (CEO, Theorem Labs, YC '25)</div>
-                                <div style="margin-bottom: 0.75rem;">• <strong>8 months</strong> designing and operating Gratified at test locations with strong venue manager references</div>
-                                <p style="margin-top: 1rem; font-style: italic;">
-                                    Dedicated to building Gratified into a new kind of café, serving the needs of a technologically embedded generation while making space for IRL connection.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <h3>Adjust Assumptions</h3>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:140px">
+      <label>Simple drinks/day</label>
+      <input id="simple" type="number" value="160">
+    </div>
+    <div style="flex:1;min-width:140px">
+      <label>Special drinks/day</label>
+      <input id="special" type="number" value="30">
+    </div>
+    <div style="flex:1;min-width:140px">
+      <label>Audacious drinks/day</label>
+      <input id="audacious" type="number" value="10">
+    </div>
+    <div style="flex:1;min-width:140px">
+      <label>Subscriptions</label>
+      <input id="subs" type="number" value="45">
+    </div>
+  </div>
 
-        <!-- ========== SECTION 5: VISION ========== -->
-        <div class="page" id="page-vision" data-page="vision">
-            <div class="container">
-                <div class="header">
-                    <h2 class="logo">Longer-Term Vision</h2>
-                    <div class="tagline">growing together</div>
-                </div>
+  <button id="updateBtn">Update Charts</button>
+</section>
 
-                <div class="content">
-                    <div class="section">
-                        <h3 class="section-title">Beyond Year One</h3>
-                        
-                        <div style="margin-top: 2rem;">
-                            <div style="padding: 2rem; background: rgba(192, 132, 151, 0.1); border-radius: 12px; margin-bottom: 2rem;">
-                                <h4 style="font-size: 1.2rem; margin-bottom: 1rem;">Main Library as Foundation</h4>
-                                <p style="opacity: 0.85; line-height: 1.8; margin-bottom: 1rem;">
-                                    This location represents an ideal proving ground for Gratified's model. The library's established foot traffic, community mission, and supportive infrastructure allow us to refine operations, build local partnerships, and demonstrate sustainable impact.
-                                </p>
-                                <p style="opacity: 0.85; line-height: 1.8;">
-                                    Success here validates the subscription model, sustainable practices, and community-first approach that we believe can transform the café landscape in SF and beyond.
-                                </p>
-                            </div>
 
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-                                <div style="padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                    <h4 style="font-size: 1rem; margin-bottom: 0.75rem;">Years 1-2: Establish & Refine</h4>
-                                    <div style="opacity: 0.85; font-size: 0.9rem; line-height: 1.6;">
-                                        <div style="margin-bottom: 0.5rem;">• Build loyal subscriber base</div>
-                                        <div style="margin-bottom: 0.5rem;">• Optimize operations & staffing</div>
-                                        <div style="margin-bottom: 0.5rem;">• Strengthen local partnerships</div>
-                                        <div style="margin-bottom: 0.5rem;">• Become essential to library experience</div>
-                                        <div>• Document best practices</div>
-                                    </div>
-                                </div>
+</div> <!-- end container -->
 
-                                <div style="padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                    <h4 style="font-size: 1rem; margin-bottom: 0.75rem;">Years 3-5: Expand Thoughtfully</h4>
-                                    <div style="opacity: 0.85; font-size: 0.9rem; line-height: 1.6;">
-                                        <div style="margin-bottom: 0.5rem;">• Additional library branches</div>
-                                        <div style="margin-bottom: 0.5rem;">• Other civic/community spaces</div>
-                                        <div style="margin-bottom: 0.5rem;">• Scale subscription model citywide</div>
-                                        <div style="margin-bottom: 0.5rem;">• Strengthen coffee supply chains</div>
-                                        <div>• Train and develop barista talent</div>
-                                    </div>
-                                </div>
 
-                                <div style="padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                    <h4 style="font-size: 1rem; margin-bottom: 0.75rem;">Long-term: Industry Impact</h4>
-                                    <div style="opacity: 0.85; font-size: 0.9rem; line-height: 1.6;">
-                                        <div style="margin-bottom: 0.5rem;">• Direct East African sourcing</div>
-                                        <div style="margin-bottom: 0.5rem;">• Sustainable café standards</div>
-                                        <div style="margin-bottom: 0.5rem;">• Community space activation</div>
-                                        <div style="margin-bottom: 0.5rem;">• Staff development pathways</div>
-                                        <div>• Replicable model for others</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<!-- ========================================================= -->
+<!-- CHART SCRIPT -->
+<!-- ========================================================= -->
 
-                    <!-- Coffee Supply Chain Vision -->
-                    <div class="section" style="margin-top: 3rem;">
-                        <h3 class="section-title">Coffee Supply Chain Innovation</h3>
-                        
-                        <div style="margin-top: 1.5rem; padding: 2rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                            <p style="opacity: 0.85; line-height: 1.8; margin-bottom: 1rem;">
-                                A larger-scale goal of Gratified is to improve trade route efficiencies, allowing more direct and beneficial purchasing from East African coffee producers. This requires scale, relationships, and expertise that we'll build over time.
-                            </p>
-                            <p style="opacity: 0.85; line-height: 1.8; margin-bottom: 1rem;">
-                                <strong>Near-term:</strong> Partner with roasters who prioritize fair trade and direct relationships. Feature their sourcing stories. Build our understanding of the supply chain.
-                            </p>
-                            <p style="opacity: 0.85; line-height: 1.8;">
-                                <strong>Long-term:</strong> As we grow to multiple locations, work directly with importers and eventually producers to create more efficient, transparent, and beneficial supply chains. Use our platform to set new standards for ethical sourcing.
-                            </p>
-                        </div>
-                    </div>
+<script>
+const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 
-                    <!-- Community Impact Vision -->
-                    <div class="section" style="margin-top: 3rem;">
-                        <h3 class="section-title">Community Impact Goals</h3>
-                        
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
-                            <div style="padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem;">🤝 Connection Hub</h4>
-                                <p style="opacity: 0.85; font-size: 0.9rem;">Create spaces where digital natives build real relationships. Host meetups. Facilitate serendipitous conversations.</p>
-                            </div>
-                            
-                            <div style="padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem;">💼 Career Pathways</h4>
-                                <p style="opacity: 0.85; font-size: 0.9rem;">Develop baristas into managers and entrepreneurs. Document and share best practices. Create opportunities for growth.</p>
-                            </div>
-                            
-                            <div style="padding: 1.5rem; background: rgba(192, 132, 151, 0.05); border-radius: 8px;">
-                                <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem;">🌍 Sustainability Leadership</h4>
-                                <p style="opacity: 0.85; font-size: 0.9rem;">Prove that sustainable practices are profitable and scalable. Inspire other businesses to raise their standards.</p>
-                            </div>
-                        </div>
-                    </div>
+const ctx1 = document.getElementById('salesChart').getContext('2d');
+const salesChart = new Chart(ctx1, {
+  type: 'bar',
+  data: {
+    labels: days,
+    datasets: [
+      { label:'Simple', data:[150,160,170,155,180,220,90], stack:'a' },
+      { label:'Special', data:[30,28,32,30,40,60,15], stack:'a' },
+      { label:'Audacious', data:[8,10,9,12,14,18,5], stack:'a' }
+    ]
+  },
+  options: {
+    scales: {
+      x: { stacked: true },
+      y: { stacked: true, beginAtZero: true }
+    }
+  }
+});
 
-                    <!-- Commitment to Library Partnership -->
-                    <div class="section" style="margin-top: 3rem;">
-                        <h3 class="section-title">Partnership Commitment</h3>
-                        
-                        <div style="margin-top: 1.5rem; padding: 2rem; background: rgba(192, 132, 151, 0.1); border-radius: 12px;">
-                            <p style="opacity: 0.85; line-height: 1.8; margin-bottom: 1rem;">
-                                As we grow, the Main Library location remains central to our identity and operations. This is where we proved the model, built community, and learned how to serve a diverse public space.
-                            </p>
-                            <p style="opacity: 0.85; line-height: 1.8; margin-bottom: 1rem;">
-                                <strong>We commit to:</strong> Quarterly meetings with Library leadership, ongoing investment in the space, priority support for library events and programming, and transparent communication about operations and community impact.
-                            </p>
-                            <p style="opacity: 0.85; line-height: 1.8;">
-                                Success isn't just financial—it's measured in patron satisfaction, community connections formed, and our contribution to the Library's mission of free and equal access to knowledge and community.
-                            </p>
-                        </div>
-                    </div>
+const ctx2 = document.getElementById('subChart').getContext('2d');
+const subChart = new Chart(ctx2, {
+  type:'doughnut',
+  data:{
+    labels:['Subscriptions','Walk-In'],
+    datasets:[{ data:[45*108, 32000], label:'Monthly' }]
+  }
+});
 
-                    <!-- Call to Partnership -->
-                    <div class="section" style="margin-top: 3rem; text-align: center;">
-                        <div style="padding: 3rem 2rem; background: rgba(192, 132, 151, 0.05); border-radius: 12px;">
-                            <div class="landing-diamond" style="width: 80px; height: 80px; margin: 0 auto 1.5rem auto;">
-                                <svg viewBox="0 0 100 100" class="diamond-svg">
-                                    <rect class="diamond-fill" x="15" y="15" width="70" height="70" transform="rotate(45 50 50)" fill="var(--theme-accent)"/>
-                                </svg>
-                            </div>
-                            <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Let's Build This Together</h3>
-                            <p style="opacity: 0.85; line-height: 1.8; max-width: 600px; margin: 0 auto;">
-                                Gratified @ Main Library represents more than a café—it's a commitment to community, sustainability, and creating spaces where people genuinely connect. We're ready to make this vision real.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+document.getElementById('updateBtn').addEventListener('click', () => {
+  const simple = Number(document.getElementById('simple').value);
+  const special = Number(document.getElementById('special').value);
+  const aud = Number(document.getElementById('audacious').value);
+  const subs = Number(document.getElementById('subs').value);
 
-    </main>
+  const scale = [1,1.1,1.05,0.95,1.2,1.4,0.6];
 
-    <!-- Mobile Bottom Navbar -->
-    <nav class="mobile-navbar" aria-label="Mobile navigation">
-        <a href="#landing" class="mobile-nav-item" data-page="landing" aria-label="Proposal">
-            <span class="mobile-nav-icon icon-dash"></span>
-        </a>
-        <a href="#operations" class="mobile-nav-item" data-page="operations" aria-label="Operations">
-            <span class="mobile-nav-icon icon-equal"></span>
-        </a>
-        <a href="#subscribe" class="mobile-nav-item" data-page="subscribe" aria-label="Community">
-            <svg class="mobile-nav-icon icon-diamond" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="18" height="18"></rect></svg>
-        </a>
-        <a href="#financial" class="mobile-nav-item" data-page="financial" aria-label="Financial">
-            <svg class="mobile-nav-icon icon-bronze" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="18" height="18"></rect></svg>
-        </a>
-        <a href="#vision" class="mobile-nav-item" data-page="vision" aria-label="Vision">
-            <svg class="mobile-nav-icon icon-yellow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 511.995 511.995" fill="currentColor" aria-hidden="true"><path d="M507.807,200.272L262.474,12.859c-3.819-2.923-9.109-2.923-12.949,0L4.191,200.272c-3.627,2.773-5.077,7.509-3.648,11.84l93.717,281.92c1.451,4.352,5.547,7.296,10.133,7.296h303.253c4.608,0,8.683-2.944,10.091-7.296l93.717-281.92C512.885,207.803,511.413,203.046,507.807,200.272z"/></svg>
-        </a>
-    </nav>
+  salesChart.data.datasets[0].data = scale.map(x => Math.round(simple * x));
+  salesChart.data.datasets[1].data = scale.map(x => Math.round(special * 0.25 * x));
+  salesChart.data.datasets[2].data = scale.map(x => Math.round(aud * 0.08 * x));
+  salesChart.update();
 
-    <!-- Modular JavaScript -->
-    <script src="assets/js/theme.js"></script>
-    <script src="assets/js/page-theme.js"></script>
-    <script src="assets/js/particles.js"></script>
-    <script src="assets/js/navigation.js"></script>
+  const subRevenue = subs * 108;
+  const walkIn = (simple*5 + special*10 + aud*15) * 30;
+  subChart.data.datasets[0].data = [subRevenue, walkIn];
+  subChart.update();
+});
+</script>
+
 </body>
 </html>
